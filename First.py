@@ -7,17 +7,13 @@ class Human:
         self.dob = dob
         self.split_name = addName.split(" ")
         self.raw_name = self.split_name[0] + "_" + self.split_name[1]
+        self.details = [self.name, self.dob]
         Human.population += 1
-        Human.details.append([self.name, self.dob])
-    """ def die(self, dod):
-        self.dod = dod
-        Human.population -= 1
-        for i in range(len(Human.details)):
-            if Human.details[i - 1] == self.raw_name:
-                Human.deceased.append([Human.details[i - 1], self.dod])
-                del Human.details[i - 1]
-    """
-
+        Human.details.append(self.details)
+   
+    def myDetails(self):
+        return self.details
+     
     @classmethod
     def getPop(cls):
         return Human.population
@@ -32,6 +28,7 @@ class Human:
             print("I am running!!" + str(person))
             checkArray = Human.details[person]
             if checkArray[0] == dead:
+                #   TODO fix this, does not append correctly, throws errors     self.details.append[dod]
                 Human.deceased.append([Human.details[person], dod])
                 del Human.details[person - 1]
 
@@ -58,4 +55,9 @@ while isLooping:
         print(Human.getDeceased())
     elif command == "end":
         isLooping = False
-
+    elif command == "specific details":
+        detailName = input("Enter name.")
+        rDetailName = detailName.split(" ")
+        fDetailName = rDetailName[0] + "_" + rDetailName[1]
+        exec("printDetails = " + fDetailName + ".myDetails()")
+        print(printDetails)
